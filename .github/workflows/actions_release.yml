@@ -10,6 +10,10 @@ on:
         description: "Node.js version to use"
         required: false
         default: "24"
+      script:
+        description: "Specify the npm/yarn script to run"
+        required: false
+        default: "npm run all"
 
 permissions:
   contents: read
@@ -25,3 +29,5 @@ jobs:
     with:
       tag: "${{ github.event.inputs.tag }}"
       node_version: ${{ inputs.node_version || '24' }}
+      script: ${{ inputs.script || 'npm run all' }}
+
