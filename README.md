@@ -144,16 +144,3 @@ The action will provide the following outputs:
 - `components`: The components of the issue.
 - `json`: The JSON response of the Jira REST API.
 
-## Test Action
-
-This action can be tested during development with the use of https://github.com/nektos/act.
-
-Please adapt the values accordingly, both in the workflow file and in the CLI command.
-
-```
-act -W .github/workflows/pr.yml \
-    -j check \
-    -s JIRA_URL=*** \
-    -s JIRA_EMAIL=*** \
-    -s JIRA_TOKEN=***
-```
