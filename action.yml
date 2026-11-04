@@ -1,0 +1,28 @@
+name: Jira Issue Info
+description: Get properties of a Jira issue.
+author: "step-security"
+branding:
+  icon: list
+  color: black
+inputs:
+  retries:
+    description: The number of retries to connect to the Jira API before considered failed.
+    required: false
+    default: 1
+  retryDelay:
+    description: The time in seconds to wait in between connection attempts.
+    required: false
+    default: 10
+  timeout:
+    description: The time in milliseconds in which a request must finish or otherwise considered failed.
+    required: false
+    default: 2000
+  issue:
+    description: The ID of the Jira issue.
+    required: true
+  customFields:
+    description: A multiline string of custom fields along with an ID with which the field's value should be registered for output.
+    required: false
+runs:
+  using: node24
+  main: ./dist/index.js
