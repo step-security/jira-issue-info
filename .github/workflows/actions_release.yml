@@ -30,4 +30,3 @@ jobs:
       tag: "${{ github.event.inputs.tag }}"
       node_version: ${{ inputs.node_version || '24' }}
       script: ${{ inputs.script || 'npm run all' }}
-

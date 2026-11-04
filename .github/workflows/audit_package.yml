@@ -15,7 +15,7 @@ on:
         description: "Node.js version to use"
         required: false
         default: "24"
-        script:
+      script:
         description: "Specify the npm/yarn script to run"
         required: false
         default: "npm run all"
