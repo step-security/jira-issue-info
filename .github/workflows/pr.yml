@@ -20,10 +20,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version: "20"
           cache: "npm"
@@ -39,48 +39,3 @@ jobs:
 
       - name: Build Code
         run: npm run build
-
-      - name: Jira Login
-        uses: frieder/gha-jira-login@v1
-        env:
-          JIRA_BASE_URL: ${{ secrets.JIRA_URL }}
-          JIRA_USER_EMAIL: ${{ secrets.JIRA_EMAIL }}
-          JIRA_API_TOKEN: ${{ secrets.JIRA_TOKEN }}
-
-      - name: Get Info
-        id: issue
-        uses: ./
-        with:
-          retries: 1
-          retryDelay: 10
-          timeout: 2000
-          issue: GHA-1
-          customFields: |
-            test: 10019
-
-      - name: Print Output
-        run: |
-          echo "Issue = ${{ steps.issue.outputs.issue }}"
-          echo "Summary = ${{ steps.issue.outputs.summary }}"
-          echo "Description = ${{ steps.issue.outputs.description }}"
-          echo "Type = ${{ steps.issue.outputs.type }}"
-          echo "Type ID = ${{ steps.issue.outputs.typeID }}"
-          echo "Status = ${{ steps.issue.outputs.status }}"
-          echo "Status ID = ${{ steps.issue.outputs.statusID }}"
-          echo "Priority = ${{ steps.issue.outputs.priority }}"
-          echo "Priority ID = ${{ steps.issue.outputs.priorityID }}"
-          echo "Labels = ${{ steps.issue.outputs.labels }}"
-          echo "Reporter Name = ${{ steps.issue.outputs.reporter }}"
-          echo "Reporter ID = ${{ steps.issue.outputs.reporterID }}"
-          echo "Assignee Name = ${{ steps.issue.outputs.assignee }}"
-          echo "Assignee ID = ${{ steps.issue.outputs.assigneeID }}"
-          echo "Components = ${{ steps.issue.outputs.components }}"
-          echo "Custom Field = ${{ steps.issue.outputs.test }}"
-          echo 'JSON = ${{ steps.issue.outputs.json }}'
-
-      - name: Merge PR
-        if: github.event_name == 'pull_request' && github.actor == 'dependabot[bot]'
-        run: gh pr merge --auto --merge --delete-branch "$PR_URL"
-        env:
-          PR_URL: ${{ github.event.pull_request.html_url }}
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

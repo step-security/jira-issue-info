@@ -1,6 +1,6 @@
 name: Jira Issue Info
 description: Get properties of a Jira issue.
-author: frieder
+author: "step-security"
 branding:
   icon: list
   color: black
@@ -24,5 +24,5 @@ inputs:
     description: A multiline string of custom fields along with an ID with which the field's value should be registered for output.
     required: false
 runs:
-  using: node20
+  using: node24
   main: ./dist/index.js
